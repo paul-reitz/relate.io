@@ -1,0 +1,84 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-relate_io}
+      POSTGRES_USER: ${DB_USER:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/app
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-relate_io}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_PORT: 5432
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: celery -A tasks worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - backend
+      - redis
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-relate_io}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_PORT: 5432
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+  celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    command: celery -A tasks beat --loglevel=info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - backend
+      - redis
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-relate_io}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_PORT: 5432
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+volumes:
+  postgres_data:

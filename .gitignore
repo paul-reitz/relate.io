@@ -1,0 +1,107 @@
+###############################################################################
+# Core
+###############################################################################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+*~
+
+# Logs & temp
+*.log
+logs/
+*.out
+*.err
+*.lock
+*.pid
+*.tmp
+*.bak
+*.cache
+
+###############################################################################
+# Python
+###############################################################################
+# Byte-code / packaging
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+htmlcov/
+.coverage*
+.cache/
+pip-wheel-metadata/
+manifest
+
+# Virtual envs & Conda
+env/
+venv/
+.venv/
+ENV/
+*.env
+*.venv
+*.conda
+relate_venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+###############################################################################
+# Node / JavaScript / TypeScript / Next.js
+###############################################################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.pnp/
+.pnp.js
+.next/
+out/
+coverage/
+.storybook/static/
+*.tsbuildinfo
+
+###############################################################################
+# Frontend build & tooling
+###############################################################################
+# React / Vite / Webpack / Parcel
+build/
+dist/
+*.map
+.cache/
+.vite/
+
+###############################################################################
+# IDEs & Editors
+###############################################################################
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+###############################################################################
+# Secrets / config overrides
+###############################################################################
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+secrets.*
+config.local.*
