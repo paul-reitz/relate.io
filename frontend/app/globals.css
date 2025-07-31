@@ -1,5 +1,345 @@
-/* globals.css */
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Momentum-inspired design system */
+@layer components {
+  /* Card components */
+  .momentum-card {
+    @apply bg-surface rounded-momentum shadow-momentum border border-gray-100;
+  }
+  
+  /* Button components */
+  .momentum-button-primary {
+    @apply bg-primary hover:bg-momentum-blue-dark text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+  }
+  
+  .momentum-button-secondary {
+    @apply bg-secondary hover:bg-momentum-green-dark text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50;
+  }
+  
+  .momentum-button-outline {
+    @apply border border-primary text-primary hover:bg-primary hover:text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+  }
+  
+  /* Input components */
+  .momentum-input {
+    @apply border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  }
+  
+  /* Badge components */
+  .momentum-badge-positive {
+    @apply bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .momentum-badge-negative {
+    @apply bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .momentum-badge-neutral {
+    @apply bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  /* Table components */
+  .momentum-table {
+    @apply w-full border-collapse;
+  }
+  
+  .momentum-table th {
+    @apply bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3 border-b border-gray-200;
+  }
+  
+  .momentum-table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-100;
+  }
+  
+  .momentum-table tbody tr:hover {
+    @apply bg-gray-50;
+  }
+  
+  /* Gradient backgrounds */
+  .momentum-gradient-primary {
+    @apply bg-gradient-to-r from-momentum-blue to-momentum-blue-light;
+  }
+  
+  .momentum-gradient-secondary {
+    @apply bg-gradient-to-r from-momentum-green to-momentum-green-light;
+  }
+  
+  .momentum-gradient-accent {
+    @apply bg-gradient-to-r from-momentum-orange to-momentum-yellow;
+  }
+  
+  /* Animation utilities */
+  .momentum-fade-in {
+    @apply animate-fade-in;
+  }
+  
+  .momentum-slide-up {
+    @apply animate-slide-up;
+  }
+  
+  /* Status indicators */
+  .momentum-status-online {
+    @apply inline-block w-2 h-2 bg-momentum-green rounded-full;
+  }
+  
+  .momentum-status-offline {
+    @apply inline-block w-2 h-2 bg-gray-400 rounded-full;
+  }
+  
+  .momentum-status-warning {
+    @apply inline-block w-2 h-2 bg-momentum-yellow rounded-full;
+  }
+  
+  .momentum-status-error {
+    @apply inline-block w-2 h-2 bg-momentum-red rounded-full;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Focus styles for accessibility */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-primary ring-opacity-50;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Momentum-inspired color scheme */
+:root {
+  /* Primary Colors - Momentum Blue */
+  --momentum-blue: #0066CC;
+  --momentum-blue-light: #3385D6;
+  --momentum-blue-dark: #004499;
+  
+  /* Secondary Colors */
+  --momentum-green: #00A651;
+  --momentum-green-light: #33B86B;
+  --momentum-green-dark: #007A3D;
+  
+  /* Accent Colors */
+  --momentum-orange: #FF6B35;
+  --momentum-red: #E53E3E;
+  --momentum-yellow: #FFB800;
+  
+  /* Neutral Colors */
+  --momentum-gray-50: #F8FAFC;
+  --momentum-gray-100: #F1F5F9;
+  --momentum-gray-200: #E2E8F0;
+  --momentum-gray-300: #CBD5E1;
+  --momentum-gray-400: #94A3B8;
+  --momentum-gray-500: #64748B;
+  --momentum-gray-600: #475569;
+  --momentum-gray-700: #334155;
+  --momentum-gray-800: #1E293B;
+  --momentum-gray-900: #0F172A;
+  
+  /* Background */
+  --momentum-bg: #FAFBFC;
+  --momentum-surface: #FFFFFF;
+  --momentum-surface-hover: #F8FAFC;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--momentum-bg);
+  color: var(--momentum-gray-800);
+}
+
+/* Custom components */
+.momentum-card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200;
+}
+
+.momentum-button-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+.momentum-button-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+}
+
+.momentum-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+}
+
+.momentum-badge-positive {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800;
+}
+
+.momentum-badge-negative {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800;
+}
+
+.momentum-badge-neutral {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800;
+}
+
+.momentum-badge-info {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+}
+
+/* Gradient backgrounds */
+.momentum-gradient-primary {
+  background: linear-gradient(135deg, var(--momentum-blue) 0%, var(--momentum-blue-light) 100%);
+}
+
+.momentum-gradient-success {
+  background: linear-gradient(135deg, var(--momentum-green) 0%, var(--momentum-green-light) 100%);
+}
+
+.momentum-gradient-warning {
+  background: linear-gradient(135deg, var(--momentum-orange) 0%, var(--momentum-yellow) 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--momentum-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--momentum-gray-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--momentum-gray-400);
+}
+
+/* Loading animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.momentum-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.momentum-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Chart container styling */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .momentum-card {
+    @apply rounded-lg;
+  }
+}
+
+/* Focus styles for accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Custom table styles */
+.momentum-table {
+  @apply w-full border-collapse;
+}
+
+.momentum-table th {
+  @apply bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200;
+}
+
+.momentum-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900 border-b border-gray-200;
+}
+
+.momentum-table tbody tr:hover {
+  @apply bg-gray-50;
+}
+
+/* Status indicators */
+.status-indicator {
+  @apply inline-block w-2 h-2 rounded-full mr-2;
+}
+
+.status-online {
+  @apply bg-green-400;
+}
+
+.status-offline {
+  @apply bg-red-400;
+}
+
+.status-warning {
+  @apply bg-yellow-400;
+}
+
+/* Notification styles */
+.notification-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.notification-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.notification-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 300ms, transform 300ms;
 }
